@@ -5,8 +5,7 @@ import io;
 from avro.io import DatumReader, BinaryDecoder
 import avro.schema
 
-group_id='';
-
+group_id=None;
 data=json.load(open('cred.json'))
 bootstrap_servers=data['bootstrap_servers'];
 sasl_plain_username=data['Api key'];
@@ -27,7 +26,7 @@ consumer = KafkaConsumer(bootstrap_servers=bootstrap_servers,security_protocol='
     consumer_timeout_ms=1000,group_id=group_id,value_deserializer=lambda m: decode(m),\
     key_deserializer=lambda m: str(json.loads(m)) if m is not None else '')
 
-consumer.subscribe(['FromMySQL'])
+consumer.subscribe(['myDBtest'])
 
 while True:
     for message in consumer:
@@ -36,6 +35,4 @@ while True:
             print(message.value,'')
             print("\n--------\n");
         time.sleep(0.1);
-        break;
-    break;
 consumer.close()
