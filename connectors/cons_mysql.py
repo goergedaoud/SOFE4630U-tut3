@@ -5,10 +5,12 @@ import io;
 from avro.io import DatumReader, BinaryDecoder
 import avro.schema
 
-bootstrap_servers='';
-sasl_plain_username='';
-sasl_plain_password='';
 group_id='';
+
+data=json.load(open('cred.json'))
+bootstrap_servers=data['bootstrap_servers'];
+sasl_plain_username=data['Api key'];
+sasl_plain_password=data['Api secret'];
 
 schema = avro.schema.parse(open("./schema.avsc").read())
 reader = DatumReader(schema)

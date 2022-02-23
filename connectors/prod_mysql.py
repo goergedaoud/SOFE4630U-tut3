@@ -7,19 +7,13 @@ import avro.schema
 
 schemaID=0;
 
-bootstrap_servers='';
-sasl_plain_username='';
-sasl_plain_password='';
+data=json.load(open('cred.json'))
+bootstrap_servers=data['bootstrap_servers'];
+sasl_plain_username=data['Api key'];
+sasl_plain_password=data['Api secret'];
 
 schema = avro.schema.parse(open("./schema.avsc").read())
 writer = DatumWriter(schema)
-
-def decode(msg_value):
-    message_bytes = io.BytesIO(msg_value)
-    message_bytes.seek(5)
-    decoder = BinaryDecoder(message_bytes)
-    event_dict = reader.read(decoder)
-    return event_dict
 
 def encode(value):
     bytes_writer = io.BytesIO()
