@@ -21,7 +21,7 @@ def encode(value):
     writer.write(value, encoder)
     return schemaID.to_bytes(5, 'big')+bytes_writer.getvalue()
 
-value={'id':5,'name':"user",'email':'test@gmail.com','department':"IT",'modified':int(1000*time.time())};
+value={'id':15,'name':"user",'email':'test@gmail.com','department':"IT",'modified':int(1000*time.time())};
 producer = KafkaProducer(bootstrap_servers=bootstrap_servers,security_protocol='SASL_SSL',sasl_mechanism='PLAIN',\
     sasl_plain_username=sasl_plain_username,sasl_plain_password=sasl_plain_password,value_serializer=lambda m: encode(m))
 producer.send('ToMySQL', value);
