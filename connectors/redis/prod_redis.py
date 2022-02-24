@@ -10,10 +10,7 @@ data=json.load(open('cred.json'))
 bootstrap_servers=data['bootstrap_servers'];
 sasl_plain_username=data['Api key'];
 sasl_plain_password=data['Api secret'];
-
-schema = avro.schema.parse(open("./schema.avsc").read())
-writer = DatumWriter(schema)
-    
+ 
 with open("ontarioTech.jpg", "rb") as f:
     value = f.read();
         
